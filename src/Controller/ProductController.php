@@ -3,13 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/product', name: 'app_product')]
+#[Route('/product', name: 'app_product_')]
 class ProductController extends AbstractController
 {
+    public function __construct(private ProductRepository $productRepository)
+    {
+        
+    }
+
     #[Route('', name: 'index')]
     public function index(): Response
     {
@@ -21,6 +27,7 @@ class ProductController extends AbstractController
     #[Route('/{slug}', name: 'details')]
     public function details(Product $product): Response
     {
-        return $this->render('product/details.html.twig', compact('product'));
+        $relatedProducts = $this->productRepository->findProductsInSameCategory($product);
+        return $this->render('product/details.html.twig', compact('product', 'relatedProducts'));
     }
 }

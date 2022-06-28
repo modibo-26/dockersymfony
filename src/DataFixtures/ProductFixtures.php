@@ -26,12 +26,12 @@ class ProductFixtures extends Fixture
                 ->setSlug($this->slugger->slug($product->getName())->lower())
                 ->setPrice($faker->randomFloat(2, 10, 150))
                 ->setQuantity($faker->numberBetween(3, 10))
-                ->setCategory($category) ;
+                ->setCategory($category);
+                if($p % 2 == 0) $product->setSoldPrice($faker->randomFloat(0, 15, 80));
             $manager->persist($product);
-
             $this->addReference('product-' . $p, $product);
-        }
 
-        $manager->flush();
+            $manager->flush();
+        }
     }
 }
