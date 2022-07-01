@@ -87,7 +87,7 @@ class ProductRepository extends ServiceEntityRepository
             WHERE p.category = :category
             AND p.id != :idToExclude
             ORDER BY p.id ASC
-            LIMIT 2'
+            LIMIT 4'
         )
         ->setParameter('category', $product->getCategory())
         ->setParameter('idToexclude', $product->getId())
@@ -96,6 +96,8 @@ class ProductRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    
 
     public function findProductsInSameCategorySql(Product $product): array {
         $conn = $this->getEntityManager()->getConnection();
@@ -115,5 +117,33 @@ class ProductRepository extends ServiceEntityRepository
 
         return $resultSet->fetchAllAssociative();
 
+    }
+
+    public function findProductsByLastDate(): array {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Product p
+            ORDER BY p.createdAt DESC'
+        )
+        ->setMaxResults(5)
+        ;
+
+        return $query->getResult();
+    }
+
+    public function findCategoryByLastDate(): array {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT c
+            FROM App\Entity\Category c
+            ORDER BY c.id DESC'
+        )
+        ->setMaxResults(3)
+        ;
+
+        return $query->getResult();
     }
 }

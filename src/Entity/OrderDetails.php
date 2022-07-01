@@ -50,7 +50,7 @@ class OrderDetails
 
     public function getOrder(): ?Order
     {
-        return $this->o;
+        return $this->order;
     }
 
     public function setOrder(?Order $order): self

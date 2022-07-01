@@ -17,7 +17,7 @@ class ProductFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        for($p= 1; $p <= 10; $p++) {
+        for($p= 1; $p <= 500; $p++) {
             $category = $this->getReference('category-'. rand(1, 7));
             $product = new Product();
             $product

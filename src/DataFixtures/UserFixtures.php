@@ -33,6 +33,7 @@ class UserFixtures extends Fixture
             $this->passwordEncoder->hashPassword($user, 'password')
             );
             $manager->persist($user);
+            $this->addReference('user-' . $u, $user);
         }
 
         $manager->flush();

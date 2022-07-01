@@ -1,4 +1,64 @@
 {% extends '_layouts/_admin.html.twig' %}
-{% block title %}{% endblock %}
-{% block h1 %}{% endblock %}
-{% block body %}{% endblock %}
+
+{% block title %}Users{% endblock %}
+{% block h1 %}Users{% endblock %}
+{% block body %}
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6><a href="{{ path('admin_users_create') }}" class="btn btn-primary">Create</a></h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>email</th>
+                        <th>ZipCode</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Roles</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>email</th>
+                        <th>ZipCode</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Roles</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.zipCode }}</td>
+                        <td>{{ user.city }}</td>
+                        <td>{{ user.country }}</td>
+                        <td>
+                            {% for role in user.roles %}
+                                <div class="badge bg-primary text-white">{{ role }}</div>
+                            {% endfor %}
+                        </td>
+                        <td> 
+                            <a href="" class="btn btn-primary">Edit</a> 
+                            <a href="" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

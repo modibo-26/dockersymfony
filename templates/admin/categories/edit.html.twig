@@ -1,0 +1,18 @@
+{% extends '_layouts/_admin.html.twig' %}
+
+{% block title %}Edit Category{% endblock %}
+{% block h1 %}Edit {{ category.name }}{% endblock %}
+{% block body %}
+
+{{ form_start(form, {'attr': {'class' : 'category'}}) }}
+    <div class="row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            {{ form_row(form.parent) }}
+        </div>
+    <button type="submit" class="btn btn-primary btn-block">Edit</button>
+{{ form_end(form) }}
+
+{% endblock %}

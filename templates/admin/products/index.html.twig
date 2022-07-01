@@ -1,0 +1,67 @@
+{% extends '_layouts/_admin.html.twig' %}
+
+{% block title %}Product{% endblock %}
+{% block h1 %}Product{% endblock %}
+{% block body %}
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6><a href="{{ path('admin_products_create') }}" class="btn btn-primary">Create</a></h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Sale (%)</th>
+                        <th>Sold Price</th>
+                        <th>Created at</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Sale (%)</th>
+                        <th>Sold Price</th>
+                        <th>Created at</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }} €</td>
+                        <td>{{ product.category.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.soldPrice|default('-') }}
+                         <td>
+                            {% if product.soldPrice %}
+                                {{(product.price * (1 - product.soldPrice / 100))|number_format(2)}} €
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>{{ product.createdAt|date('d/m/y h:i:s' ) }}
+                        <td>
+                            <a href="{{ path('admin_products_edit', {id: product.id}) }}" class="btn btn-primary">Edit</a> 
+                            <a href="{{ path('admin_products_delete', {id: product.id}) }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

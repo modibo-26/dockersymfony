@@ -1,0 +1,52 @@
+{% extends '_layouts/_admin.html.twig' %}
+
+{% block title %}Order Détails{% endblock %}
+{% block h1 %}Orders Détails{% endblock %}
+{% block body %}
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">3 Lasts Categories</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for orderDetail in orderDetails %}
+                    <tr>
+                        <td>{{ orderDetail.product.name }}</td>
+                        <td>{{ orderDetail.price }}</td>
+                        <td>{{ orderDetail.quantity }}</td>
+                        <td>{{ orderDetail.quantity * orderDetail.product.price }}</td>
+                        <td>
+                            <a href="" class="btn btn-primary">Edit</a> 
+                            <a href="" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

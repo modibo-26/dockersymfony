@@ -1,0 +1,18 @@
+{% extends '_layouts/_admin.html.twig' %}
+
+{% block title %}Create Category{% endblock %}
+{% block h1 %}Create new Category{% endblock %}
+{% block body %}
+
+{{ form_start(categoryForm, {'attr': {'class' : 'category'}}) }}
+    <div class="row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            {{ form_row(categoryForm.name) }}
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            {{ form_row(categoryForm.parent) }}
+        </div>
+    <button type="submit" class="btn btn-primary btn-block">Create</button>
+{{ form_end(categoryForm) }}
+
+{% endblock %}
